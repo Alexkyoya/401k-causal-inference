@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>401(k) Causal Inference Project | Projet de recherche causal</title>
+    <meta
+      name="description"
+      content="English and French bilingual project page for a causal inference study on whether 401(k) eligibility increases household financial wealth."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand-group">
+          <div class="brand-logo">401k</div>
+          <span class="lang-content en active">Research Dashboard</span>
+          <span class="lang-content fr">Tableau de bord de recherche</span>
+        </div>
+
+        <nav class="nav">
+          <a href="#overview" class="lang-content en active">Overview</a>
+          <a href="#overview" class="lang-content fr">Aperçu</a>
+          <a href="#causal-graph" class="lang-content en active">Causal graph</a>
+          <a href="#causal-graph" class="lang-content fr">Schéma causal</a>
+          <a href="#method" class="lang-content en active">Method</a>
+          <a href="#method" class="lang-content fr">Méthode</a>
+          <a href="#findings" class="lang-content en active">Findings</a>
+          <a href="#findings" class="lang-content fr">Résultats</a>
+        </nav>
+
+        <div class="lang-switch" aria-label="Language switcher">
+          <button class="lang-btn active" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero" id="overview">
+          <div class="hero-copy">
+            <p class="eyebrow lang-content en active">Causal inference · household finance</p>
+            <p class="eyebrow lang-content fr">Inférence causale · finances des ménages</p>
+
+            <h1 class="lang-content en active">Does 401(k) eligibility increase household financial wealth?</h1>
+            <h1 class="lang-content fr">L'éligibilité au 401(k) augmente-t-elle la richesse financière des ménages ?</h1>
+
+            <p class="lead lang-content en active">
+              We study whether access to an employer-sponsored retirement plan causes households to
+              accumulate more net financial assets, while accounting for confounding factors like
+              income, age, education, and family structure.
+            </p>
+            <p class="lead lang-content fr">
+              Nous examinons si l'accès à un plan de retraite offert par l'employeur incite les ménages
+              à accumuler davantage d'actifs financiers nets, tout en tenant compte de facteurs de
+              confusion tels que le revenu, l'âge, l'éducation et la structure familiale.
+            </p>
+
+            <div class="cta-row">
+              <a class="button primary lang-content en active" href="#findings">Explore results</a>
+              <a class="button primary lang-content fr" href="#findings">Explorer les résultats</a>
+
+              <a class="button secondary lang-content en active" href="#causal-graph">See causal model</a>
+              <a class="button secondary lang-content fr" href="#causal-graph">Voir le modèle causal</a>
+            </div>
+
+            <ul class="meta-list">
+              <li class="lang-content en active">9,915 households</li>
+              <li class="lang-content fr">9 915 ménages</li>
+              <li class="lang-content en active">14 variables</li>
+              <li class="lang-content fr">14 variables</li>
+              <li class="lang-content en active">Outcome: net_tfa</li>
+              <li class="lang-content fr">Variable expliquée : net_tfa</li>
+            </ul>
+          </div>
+
+          <div class="hero-panel card">
+            <div class="small-label lang-content en active">Summary snapshot</div>
+            <div class="small-label lang-content fr">Aperçu synthétique</div>
+
+            <div class="big-number" id="meanNetTFA">$18,051</div>
+
+            <div class="metric-caption lang-content en active">Average net financial assets across the sample</div>
+            <div class="metric-caption lang-content fr">Valeur moyenne des actifs financiers nets dans l'échantillon</div>
+
+            <div class="bar-block">
+              <div class="bar-row">
+                <span class="lang-content en active">Eligible</span>
+                <span class="lang-content fr">Éligibles</span>
+                <div class="bar-track">
+                  <div class="bar-fill eligible" id="eligibleBar"></div>
+                </div>
+                <strong id="eligibleMean">$30,347</strong>
+              </div>
+              <div class="bar-row">
+                <span class="lang-content en active">Not eligible</span>
+                <span class="lang-content fr">Non éligibles</span>
+                <div class="bar-track">
+                  <div class="bar-fill default" id="nonEligibleBar"></div>
+                </div>
+                <strong id="nonEligibleMean">$10,788</strong>
+              </div>
+            </div>
+
+            <div class="highlight-note">
+              <span class="lang-content en active">Eligible households hold roughly <strong id="differenceAmount">+$19,559</strong> more in net financial assets on average.</span>
+              <span class="lang-content fr">Les ménages éligibles détiennent en moyenne environ <strong id="differenceAmountFr">+$19 559</strong> de plus en actifs financiers nets.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Key statistics">
+          <article class="stat-card card">
+            <span class="stat-label lang-content en active">Eligibility rate</span>
+            <span class="stat-label lang-content fr">Taux d'éligibilité</span>
+            <strong id="eligibilityRate">37.1%</strong>
+            <small class="lang-content en active">of households are eligible</small>
+            <small class="lang-content fr">des ménages sont éligibles</small>
+          </article>
+
+          <article class="stat-card card">
+            <span class="stat-label lang-content en active">Participation rate</span>
+            <span class="stat-label lang-content fr">Taux de participation</span>
+            <strong id="participationRate">26.2%</strong>
+            <small class="lang-content en active">actively contribute to a 401(k)</small>
+            <small class="lang-content fr">contribuent activement à un 401(k)</small>
+          </article>
+
+          <article class="stat-card card">
+            <span class="stat-label lang-content en active">Income gap</span>
+            <span class="stat-label lang-content fr">Écart de revenu</span>
+            <strong id="incomeGap">+$15,368</strong>
+            <small class="lang-content en active">eligible households earn more</small>
+            <small class="lang-content fr">les ménages éligibles gagnent davantage</small>
+          </article>
+
+          <article class="stat-card card">
+            <span class="stat-label lang-content en active">Homeowner share</span>
+            <span class="stat-label lang-content fr">Part des propriétaires</span>
+            <strong id="homeownerShare">63.5%</strong>
+            <small class="lang-content en active">in the sample</small>
+            <small class="lang-content fr">dans l'échantillon</small>
+          </article>
+        </section>
+
+        <section class="feature-grid">
+          <div class="card info-panel" id="causal-graph">
+            <div class="panel-header">
+              <p class="eyebrow lang-content en active">Causal design</p>
+              <p class="eyebrow lang-content fr">Conception causale</p>
+
+              <h2 class="lang-content en active">Why a simple comparison is misleading</h2>
+              <h2 class="lang-content fr">Pourquoi une simple comparaison est trompeuse</h2>
+            </div>
+
+            <p class="lang-content en active">
+              Workers with access to a 401(k) are not random: they often have higher income, more education,
+              different household structure, and a stronger financial profile. Those same characteristics also
+              influence wealth accumulation.
+            </p>
+            <p class="lang-content fr">
+              Les travailleurs ayant accès à un 401(k) ne sont pas choisis au hasard : ils ont souvent un revenu
+              plus élevé, plus d'études, une structure familiale différente et un profil financier plus solide.
+              Ces mêmes caractéristiques influencent aussi l'accumulation de richesse.
+            </p>
+
+            <div class="pill-list">
+              <span class="lang-content en active">Income</span>
+              <span class="lang-content fr">Revenu</span>
+              <span class="lang-content en active">Education</span>
+              <span class="lang-content fr">Éducation</span>
+              <span class="lang-content en active">Age</span>
+              <span class="lang-content fr">Âge</span>
+              <span class="lang-content en active">Family size</span>
+              <span class="lang-content fr">Taille du ménage</span>
+              <span class="lang-content en active">Home ownership</span>
+              <span class="lang-content fr">Propriété du logement</span>
+              <span class="lang-content en active">Pension status</span>
+              <span class="lang-content fr">Statut de pension</span>
+            </div>
+          </div>
+
+          <div class="card image-panel">
+            <img src="causal_model.png" alt="Causal diagram of the 401(k) research design" />
+          </div>
+        </section>
+
+        <section class="timeline card" id="method">
+          <div class="panel-header">
+            <p class="eyebrow lang-content en active">Methodology</p>
+            <p class="eyebrow lang-content fr">Méthodologie</p>
+            <h2 class="lang-content en active">Research pipeline</h2>
+            <h2 class="lang-content fr">Pipeline de recherche</h2>
+          </div>
+
+          <div class="step-grid">
+            <div class="step-item">
+              <div class="step-number">01</div>
+              <h3 class="lang-content en active">Data exploration</h3>
+              <h3 class="lang-content fr">Exploration des données</h3>
+              <p class="lang-content en active">Inspect distribution, missingness, and baseline differences by eligibility status.</p>
+              <p class="lang-content fr">Étudier la distribution, les valeurs manquantes et les différences de base selon le statut d'éligibilité.</p>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">02</div>
+              <h3 class="lang-content en active">Model estimation</h3>
+              <h3 class="lang-content fr">Estimation du modèle</h3>
+              <p class="lang-content en active">Estimate the treatment effect using flexible causal models and machine learning methods.</p>
+              <p class="lang-content fr">Estimer l'effet du traitement à l'aide de modèles causals flexibles et de méthodes d'apprentissage automatique.</p>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">03</div>
+              <h3 class="lang-content en active">Identification</h3>
+              <h3 class="lang-content fr">Identification</h3>
+              <p class="lang-content en active">Control for confounders under the assumption that, conditional on observables, eligibility is as good as random.</p>
+              <p class="lang-content fr">Contrôler les facteurs de confusion en supposant que, conditionnellement aux variables observées, l'éligibilité est comparable à un tirage aléatoire.</p>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">04</div>
+              <h3 class="lang-content en active">Refutation</h3>
+              <h3 class="lang-content fr">Réfutation</h3>
+              <p class="lang-content en active">Check robustness and sensitivity so the estimate is not driven by a single misspecified model.</p>
+              <p class="lang-content fr">Vérifier la robustesse et la sensibilité pour éviter qu'une estimation soit guidée par un seul modèle mal spécifié.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="findings card" id="findings">
+          <div class="panel-header">
+            <p class="eyebrow lang-content en active">Interpretation</p>
+            <p class="eyebrow lang-content fr">Interprétation</p>
+            <h2 class="lang-content en active">Key project takeaways</h2>
+            <h2 class="lang-content fr">Points clés du projet</h2>
+          </div>
+
+          <div class="findings-grid">
+            <div class="findings-card">
+              <div class="findings-icon">◎</div>
+              <h3 class="lang-content en active">Positive treatment signal</h3>
+              <h3 class="lang-content fr">Signal positif du traitement</h3>
+              <p class="lang-content en active">The raw comparison already shows a strong positive association between 401(k) eligibility and net financial assets.</p>
+              <p class="lang-content fr">La comparaison brute montre déjà une forte association positive entre l'éligibilité au 401(k) et les actifs financiers nets.</p>
+            </div>
+
+            <div class="findings-card">
+              <div class="findings-icon">✓</div>
+              <h3 class="lang-content en active">Confounding matters</h3>
+              <h3 class="lang-content fr">Les facteurs de confusion comptent</h3>
+              <p class="lang-content en active">Income and education are important drivers of both eligibility and wealth, so a naive comparison would overstate the effect.</p>
+              <p class="lang-content fr">Le revenu et l'éducation sont des moteurs importants de l'éligibilité et de la richesse, de sorte qu'une comparaison naïve surestimerait l'effet.</p>
+            </div>
+
+            <div class="findings-card emphasis">
+              <div class="findings-icon">✦</div>
+              <h3 class="lang-content en active">Research conclusion</h3>
+              <h3 class="lang-content fr">Conclusion de recherche</h3>
+              <p class="lang-content en active">After adjusting for observed confounders, the evidence supports the hypothesis that 401(k) eligibility increases household financial wealth, while remaining attentive to identification assumptions.</p>
+              <p class="lang-content fr">Après ajustement pour les facteurs de confusion observés, les données soutiennent l'hypothèse selon laquelle l'éligibilité au 401(k) augmente la richesse financière des ménages, tout en restant attentive aux hypothèses d'identification.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span class="lang-content en active">Assignment 2 • Causal Inference • 401(k) Eligibility Study</span>
+        <span class="lang-content fr">Travail 2 • Inférence causale • Étude sur l'éligibilité au 401(k)</span>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
