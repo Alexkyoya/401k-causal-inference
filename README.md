@@ -83,4 +83,4 @@ The version pins matter: `networkx` 3.5+ removed a function DoWhy relies on, and
 
 ---
 
-Course project for [Course Code], [University], [Term]. Author: [Your Name].
+Course project for McGill University MMA. Author: Alex Zhao.
